@@ -1,3 +1,9 @@
+/*
+Kevin Luu
+Feb 25,2017
+Purpose: Functionality for CRUD using mongoose and MongoDB
+*/
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
