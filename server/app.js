@@ -11,6 +11,13 @@ let mongoose = require('mongoose');
 // URI
 let config = require('./config/db');
 
+//modules installed for authentication
+let session = require('express-session');
+let passport = require('passport');
+let passportlocal = require('passport-local');
+let LocalStrategy = passportlocal.Strategy;
+let flash = require('connect-flash'); // displays errors / login messages
+
 mongoose.connect(process.env.URI || config.URI);
 
 let db = mongoose.connection;
