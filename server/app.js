@@ -1,3 +1,9 @@
+/*
+Kevin Luu 
+Feb. 25, 2017
+Added Functionality: Initalize Session and use flash
+*/
+
 // modules required for the project
 let express = require('express');
 let path = require('path'); // part of node.js core
@@ -60,6 +66,7 @@ app.use(passport.session());
 // route redirects
 app.use('/', index);
 app.use('/books', books);
+
 
 
 // Handle 404 Errors
