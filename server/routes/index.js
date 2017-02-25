@@ -1,8 +1,9 @@
 /*
 Kevin Luu
-Feb. 25, 2017
-Purpose: Added Functionality - Authentication
+Feb.25, 2017
+Added Functionality - Authentication
 */
+
 
 // modules required for routing
 let express = require('express');
@@ -31,7 +32,7 @@ function requireAuth(req, res, next) {
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    games: '',
+    books: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -40,7 +41,7 @@ router.get('/', (req, res, next) => {
 router.get('/contact', (req, res, next) => {
   res.render('content/contact', {
     title: 'Contact',
-    games: '',
+    books: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -52,19 +53,19 @@ router.get('/login', (req, res, next)=>{
     // render the login page
     res.render('auth/login', {
       title: "Login",
-      games: '',
+      books: '',
       messages: req.flash('loginMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/games'); // redirect to games list
+    return res.redirect('/books'); // redirect to books list
   }
 });
 
 // POST /login - process the login attempt
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/games',
+  successRedirect: '/books',
   failureRedirect: '/login',
   failureFlash: 'bad login'
 }));
@@ -76,13 +77,13 @@ router.get('/register', (req, res, next)=>{
     // render the registration page
       res.render('auth/register', {
       title: "Register",
-      games: '',
+      books: '',
       messages: req.flash('registerMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/games'); // redirect to games list
+    return res.redirect('/books'); // redirect to books list
   }
 });
 
@@ -104,14 +105,14 @@ router.post('/register', (req, res, next)=>{
         }
         return res.render('auth/register', {
           title: "Register",
-          games: '',
+          books: '',
           messages: req.flash('registerMessage'),
           displayName: req.user ? req.user.displayName : ''
         });
       }
       // if registration is successful
       return passport.authenticate('local')(req, res, ()=>{
-        res.redirect('/games');
+        res.redirect('/books');
       });
     });
 });
