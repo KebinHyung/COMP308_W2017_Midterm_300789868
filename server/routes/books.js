@@ -36,10 +36,10 @@ router.get('/add', (req, res, next) => {
 router.post('/add', (req, res, next) => {
 
     let newBook = book({
-      "title": req.body.Title,
-      "price": req.body.Price,
-      "author": req.body.Author,
-      "genre": req.body.Genre
+      "Title": req.body.title,
+      "Price": req.body.price,
+      "Author": req.body.author,
+      "Genre": req.body.genre
   });
       book.create(newBook, (err, book) => {
       if(err) {
@@ -83,10 +83,10 @@ router.post('/:id', (req, res, next) => {
 
      let updatedBook = book({
        "_id": id,
-      "title": req.body.Title,
-      "price": req.body.Price,
-      "author": req.body.Author,
-      "genre": req.body.Genre
+      "Title": req.body.title,
+      "Price": req.body.price,
+      "Author": req.body.author,
+      "Genre": req.body.genre
     });
 
     book.update({_id: id}, updatedBook, (err) => {
@@ -102,10 +102,18 @@ router.post('/:id', (req, res, next) => {
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
+// get a reference to the id from the url
+    let id = req.params.id;
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+    book.remove({_id: id}, (err) => {
+      if(err) {
+        console.log(err);
+        res.end(err);
+      } else {
+        // refresh the games list
+        res.redirect('/books');
+      }
+    });
 });
 
 
